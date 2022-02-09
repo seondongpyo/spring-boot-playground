@@ -21,4 +21,11 @@ class MemberMapperTest {
 		List<Member> members = memberMapper.findAll();
 		assertThat(members).hasSize(2);
 	}
+
+	@Test
+	void findById() {
+		Member member = memberMapper.findById(1L);
+		assertThat(member.getName()).isEqualTo("홍길동");
+		assertThat(member.getAge()).isEqualTo(20);
+	}
 }
