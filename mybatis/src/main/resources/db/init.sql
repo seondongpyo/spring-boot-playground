@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS Member;
 
 CREATE TABLE Member
 (
-    id   bigint primary key,
+    id   bigint primary key auto_increment,
     name varchar(255),
     age  integer
 );
