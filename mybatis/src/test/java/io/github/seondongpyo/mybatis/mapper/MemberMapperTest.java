@@ -28,4 +28,11 @@ class MemberMapperTest {
 		assertThat(member.getName()).isEqualTo("홍길동");
 		assertThat(member.getAge()).isEqualTo(20);
 	}
+
+	@Test
+	void save() {
+		Member member = new Member("김철수", 25);
+		memberMapper.save(member);
+		assertThat(member.getId()).isEqualTo(3);
+	}
 }

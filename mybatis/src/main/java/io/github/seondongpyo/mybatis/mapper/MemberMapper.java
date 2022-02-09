@@ -2,7 +2,9 @@ package io.github.seondongpyo.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -16,5 +18,9 @@ public interface MemberMapper {
 
 	@Select("select * from Member where id = #{id}")
 	Member findById(@Param("id") Long id);
+
+	@Insert("insert into Member(name, age) values (#{name}, #{age})")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	void save(Member member);
 
 }
