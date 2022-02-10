@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.seondongpyo.mybatis.mapper.PostMapper">
+    <insert id="save" parameterType="io.github.seondongpyo.mybatis.domain.Post">
+        insert into Post(writer, title, content)
+        values(#{writer}, #{title}, #{content})
+    </insert>
+
+    <select id="findAll" resultType="io.github.seondongpyo.mybatis.domain.Post">
+        select * from Post
+    </select>
+</mapper>
