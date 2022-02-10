@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import io.github.seondongpyo.mybatis.domain.Member;
 
@@ -22,5 +23,8 @@ public interface MemberMapper {
 	@Insert("insert into Member(name, age) values (#{name}, #{age})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	void save(Member member);
+
+	@Update("update Member set name = #{name}, age = #{age} where id = #{id}")
+	void update(Member updateMember);
 
 }

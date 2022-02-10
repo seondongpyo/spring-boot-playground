@@ -35,4 +35,17 @@ class MemberMapperTest {
 		memberMapper.save(member);
 		assertThat(member.getId()).isEqualTo(3);
 	}
+
+	@Test
+	void update() {
+		Long memberId = 1L;
+		Member member = memberMapper.findById(memberId);
+		member.setName("고길동");
+		member.setAge(50);
+		memberMapper.update(member);
+
+		Member updatedMember = memberMapper.findById(memberId);
+		assertThat(updatedMember.getName()).isEqualTo("고길동");
+		assertThat(updatedMember.getAge()).isEqualTo(50);
+	}
 }
