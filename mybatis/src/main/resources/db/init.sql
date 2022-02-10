@@ -19,3 +19,5 @@ CREATE TABLE Post
     content clob
 );
 
+INSERT INTO Post VALUES(1, 'kim', 'title1', 'content1');
+INSERT INTO Post VALUES(2, 'park', 'title2', 'content2');
