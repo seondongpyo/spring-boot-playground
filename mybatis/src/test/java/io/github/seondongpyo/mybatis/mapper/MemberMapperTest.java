@@ -48,4 +48,12 @@ class MemberMapperTest {
 		assertThat(updatedMember.getName()).isEqualTo("고길동");
 		assertThat(updatedMember.getAge()).isEqualTo(50);
 	}
+
+	@Test
+	void delete() {
+		memberMapper.delete(1L);
+
+		List<Member> members = memberMapper.findAll();
+		assertThat(members).hasSize(1);
+	}
 }
