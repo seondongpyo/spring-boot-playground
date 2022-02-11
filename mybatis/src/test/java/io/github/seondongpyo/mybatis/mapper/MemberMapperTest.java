@@ -33,7 +33,7 @@ class MemberMapperTest {
 	void save() {
 		Member member = new Member("김철수", 25);
 		memberMapper.save(member);
-		assertThat(member.getId()).isEqualTo(3);
+		assertThat(member.getMemberId()).isEqualTo(3);
 	}
 
 	@Test

@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Member {
 
-	private Long id;
+	private Long memberId;
 	private String name;
 	private int age;
 

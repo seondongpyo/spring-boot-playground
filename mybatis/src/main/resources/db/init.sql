@@ -3,9 +3,9 @@ DROP TABLE IF EXISTS Post;
 
 CREATE TABLE Member
 (
-    id   bigint primary key auto_increment,
-    name varchar(255),
-    age  integer
+    member_id bigint primary key auto_increment,
+    name      varchar(255),
+    age       integer
 );
 
 INSERT INTO Member VALUES(1, '홍길동', 20);

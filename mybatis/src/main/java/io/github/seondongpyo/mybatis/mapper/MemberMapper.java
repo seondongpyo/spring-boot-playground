@@ -18,17 +18,17 @@ public interface MemberMapper {
 	@Select("select * from Member")
 	List<Member> findAll();
 
-	@Select("select * from Member where id = #{id}")
-	Member findById(@Param("id") Long id);
+	@Select("select * from Member where member_id = #{memberId}")
+	Member findById(@Param("memberId") Long memberId);
 
 	@Insert("insert into Member(name, age) values (#{name}, #{age})")
-	@Options(useGeneratedKeys = true, keyProperty = "id")
+	@Options(useGeneratedKeys = true, keyProperty = "memberId")
 	void save(Member member);
 
-	@Update("update Member set name = #{name}, age = #{age} where id = #{id}")
+	@Update("update Member set name = #{name}, age = #{age} where member_id = #{memberId}")
 	void update(Member updateMember);
 
-	@Delete("delete from Member where id = #{id}")
+	@Delete("delete from Member where member_id = #{id}")
 	void delete(Long memberId);
 
 }
