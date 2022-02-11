@@ -4,24 +4,24 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="io.github.seondongpyo.mybatis.mapper.PostMapper">
-    <select id="findAll" resultType="io.github.seondongpyo.mybatis.domain.Post">
+    <select id="findAll" resultType="Post">
         select * from Post
     </select>
 
-    <select id="findById" resultType="io.github.seondongpyo.mybatis.domain.Post">
+    <select id="findById" resultType="Post">
         select * from Post where id = #{id}
     </select>
 
-    <insert id="save" parameterType="io.github.seondongpyo.mybatis.domain.Post">
+    <insert id="save" parameterType="Post">
         insert into Post(writer, title, content)
         values(#{writer}, #{title}, #{content})
     </insert>
 
-    <update id="update" parameterType="io.github.seondongpyo.mybatis.domain.Post">
+    <update id="update" parameterType="Post">
         update Post set writer = #{writer}, title = #{title}, content = #{content} where id = #{id}
     </update>
 
-    <delete id="delete" parameterType="io.github.seondongpyo.mybatis.domain.Post">
+    <delete id="delete" parameterType="Post">
         delete from Post where id = #{id}
     </delete>
 </mapper>
