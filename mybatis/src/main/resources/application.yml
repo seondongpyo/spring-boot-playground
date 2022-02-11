@@ -16,6 +16,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mybatis/mapper/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: io.github.seondongpyo.mybatis.domain
+  config-location: mybatis/mybatis-config.xml  # xml 설정파일 경로 지정
+
+  # xml 설정을 사용하는 경우, 이하의 설정을 추가하면 충돌이 발생한다.
+#  configuration:
+#    map-underscore-to-camel-case: true
+#  type-aliases-package: io.github.seondongpyo.mybatis.domain
