@@ -1,10 +1,11 @@
 package io.github.seondongpyo.security.domain;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,9 +31,12 @@ public class User implements UserDetails {
 
 	private String password;
 
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 
 	@Override
