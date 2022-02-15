@@ -29,13 +29,13 @@ public class UserService implements UserDetailsService {
 		userRepository.save(User.builder()
 			.username("user1")
 			.password(passwordEncoder.encode("user1"))
-			.role(Role.ROLE_USER)
+			.role(Role.USER)
 			.build());
 
 		userRepository.save(User.builder()
 			.username("user2")
 			.password(passwordEncoder.encode("user2"))
-			.role(Role.ROLE_ADMIN)
+			.role(Role.ADMIN)
 			.build());
 	}
 }
