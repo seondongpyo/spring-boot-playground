@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import io.github.seondongpyo.security.domain.Role;
 import io.github.seondongpyo.security.domain.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -42,13 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/login")
 					.permitAll()
-				.anyRequest()
-					.authenticated()
+				.antMatchers("/user")
+					.hasAuthority(Role.USER.name())
+				.antMatchers("/admin")
+					.hasAuthority(Role.ADMIN.name())
 			.and()
 				.formLogin()
 					.loginPage("/login")
-					.loginProcessingUrl("/login")
-					.defaultSuccessUrl("/")
-					.failureUrl("/login?error=true");
+					.defaultSuccessUrl("/");
 	}
 }
