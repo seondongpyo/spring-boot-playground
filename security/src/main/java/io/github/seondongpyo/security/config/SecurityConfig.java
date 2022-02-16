@@ -1,5 +1,6 @@
 package io.github.seondongpyo.security.config;
 
+import io.github.seondongpyo.security.config.social.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private final CustomOAuth2UserService customOAuth2UserService;
 	private final UserService userService;
 
 	@Bean
@@ -38,18 +40,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()
 			.headers()
 				.frameOptions()
-				.disable()
-			.and()
-				.authorizeRequests()
+					.disable();
+
+		http.authorizeRequests()
 				.antMatchers("/login")
 					.permitAll()
 				.antMatchers("/user")
 					.hasAuthority(Role.USER.name())
 				.antMatchers("/admin")
-					.hasAuthority(Role.ADMIN.name())
-			.and()
-				.formLogin()
-					.loginPage("/login")
-					.defaultSuccessUrl("/");
+					.hasAnyAuthority(Role.ADMIN.name());
+
+		http.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/");
+
+		http.oauth2Login()
+				.userInfoEndpoint()
+				.userService(customOAuth2UserService);
 	}
 }
