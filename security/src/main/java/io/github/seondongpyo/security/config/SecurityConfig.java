@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final CustomOAuth2UserService customOAuth2UserService;
+	private final CustomAuthenticationProvider authenticationProvider;
 	private final UserService userService;
 
 	@Bean
@@ -32,6 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth
 			.userDetailsService(userService)
 			.passwordEncoder(passwordEncoder());
+
+		auth
+			.authenticationProvider(authenticationProvider);
 	}
 
 	@Override
