@@ -1,18 +1,13 @@
 package io.github.seondongpyo.security.config;
 
 import io.github.seondongpyo.security.config.social.CustomOAuth2UserService;
-import org.springframework.context.annotation.Bean;
+import io.github.seondongpyo.security.domain.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import io.github.seondongpyo.security.domain.Role;
-import io.github.seondongpyo.security.domain.UserService;
-import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Configuration
@@ -21,19 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final CustomAuthenticationProvider authenticationProvider;
-	private final UserService userService;
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-			.userDetailsService(userService)
-			.passwordEncoder(passwordEncoder());
-
 		auth
 			.authenticationProvider(authenticationProvider);
 	}
