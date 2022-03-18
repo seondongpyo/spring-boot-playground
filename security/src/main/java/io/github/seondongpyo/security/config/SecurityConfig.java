@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final CustomOAuth2UserService customOAuth2UserService;
 	private final CustomAuthenticationProvider authenticationProvider;
+	private final CustomAuthenticationSuccessHandler authenticationSuccessHandler;
 
 	@Bean
 	public SecurityContextLogoutHandler securityContextLogoutHandler() {
@@ -55,11 +56,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user")
 					.hasAuthority(Role.USER.name())
 				.antMatchers("/admin")
-					.hasAnyAuthority(Role.ADMIN.name());
+					.hasAuthority(Role.ADMIN.name())
+				.anyRequest()
+					.authenticated();
 
 		http.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/")
+				.successHandler(authenticationSuccessHandler)
 				.permitAll();
 
 //		http.oauth2Login()
