@@ -20,7 +20,7 @@ public class MemberController {
     public String members(Model model) {
         List<Member> members = memberService.findAll();
         model.addAttribute("members", members);
-        return "members";
+        return "modal-member";
     }
 
     @PostConstruct
