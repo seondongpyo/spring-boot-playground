@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -20,7 +22,11 @@ public class MemberController {
     @GetMapping("/members")
     public String members(Model model) {
         List<Member> members = memberService.findAll();
+        List<Role> roles = Arrays.stream(Role.values())
+            .collect(Collectors.toList());
+
         model.addAttribute("members", members);
+        model.addAttribute("roles", roles);
         return "modal-member";
     }
 
