@@ -3,10 +3,7 @@ package io.github.seondongpyo.thymeleaf.web.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -21,8 +18,12 @@ public class Member {
 
     private int age;
 
-    public Member(String name, int age) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public Member(String name, int age, Role role) {
         this.name = name;
         this.age = age;
+        this.role = role;
     }
 }
