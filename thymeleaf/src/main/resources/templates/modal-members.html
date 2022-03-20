@@ -12,32 +12,15 @@
             </div>
             <div class="modal-body">
                 <label>회원 등급 :
-                    <select name="role">
-                        <option th:each="role : ${roles}"
-                                th:text="${role.name}"
-                                th:value="${role.name}">
+                    <select name="role" id="member-role">
+                        <option th:each="role : ${T(io.github.seondongpyo.thymeleaf.web.domain.Role).values()}"
+                                th:text="${role}"
+                                th:value="${role}">
                             등급
                         </option>
                     </select>
                 </label>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>이름</th>
-                            <th>나이</th>
-                            <th>등급</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="member : ${members}">
-                            <td th:text="${member.id}">ID</td>
-                            <td th:text="${member.name}">이름</td>
-                            <td th:text="${member.age}">나이</td>
-                            <td th:text="${member.role}">등급</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <table th:replace="table-members :: table-members"></table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<table th:fragment="table-members" id="table-members" class="table table-striped">
+    <thead>
+        <tr>
+            <th>번호</th>
+            <th>ID</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>등급</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="member, status : ${members}">
+            <td th:text="${status.count}">번호</td>
+            <td th:text="${member.id}">ID</td>
+            <td th:text="${member.name}">이름</td>
+            <td th:text="${member.age}">나이</td>
+            <td th:text="${member.role}">등급</td>
+        </tr>
+    </tbody>
+</table>
+</html>

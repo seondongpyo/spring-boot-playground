@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -19,15 +21,19 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/members")
-    public String members(Model model) {
-        List<Member> members = memberService.findAll();
-        List<Role> roles = Arrays.stream(Role.values())
+    @ModelAttribute
+    public List<Role> roles() {
+        return Arrays.stream(Role.values())
             .collect(Collectors.toList());
+    }
 
+    @GetMapping("/members")
+    public String members(@RequestParam(required = false) Role role,
+                          Model model) {
+        System.out.println("MemberController.members");
+        List<Member> members = memberService.findAllByRole(role);
         model.addAttribute("members", members);
-        model.addAttribute("roles", roles);
-        return "modal-member";
+        return "table-members";
     }
 
     @PostConstruct

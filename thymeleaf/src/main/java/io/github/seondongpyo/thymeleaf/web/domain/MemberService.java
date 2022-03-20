@@ -15,7 +15,8 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public List<Member> findAll() {
-        return memberRepository.findAll();
+    public List<Member> findAllByRole(Role role) {
+        return role.isAll() ? memberRepository.findAll()
+                            : memberRepository.findAllByRole(role);
     }
 }

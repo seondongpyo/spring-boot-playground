@@ -15,17 +15,25 @@
 </button>
 
 <div id="member-modal-container">
-    <div th:replace="modal-member :: member-modal"></div>
+    <div th:replace="modal-members :: member-modal"></div>
 </div>
 </body>
 <script type="text/javascript">
     $("#show-member-modal").on("click", () => {
-        fetch("/members")
+        let role = $("#member-role").val();
+        fetch(`/members?role=${role}`)
             .then(response => response.text())
             .then(view => {
-                $("#member-modal-container").html(view);
+                $("#table-members").html(view);
                 $("#member-modal").modal('show');
             })
-    })
+    });
+
+    $("#member-role").on("change", () => {
+        let role = $("#member-role").val();
+        fetch(`/members?role=${role}`)
+            .then(response => response.text())
+            .then(view => $("#table-members").html(view));
+    });
 </script>
 </html>
