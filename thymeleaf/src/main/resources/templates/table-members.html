@@ -8,6 +8,7 @@
             <th>이름</th>
             <th>나이</th>
             <th>등급</th>
+            <th>승인</th>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +18,14 @@
             <td th:text="${member.name}">이름</td>
             <td th:text="${member.age}">나이</td>
             <td th:text="${member.role}">등급</td>
+            <td>
+                <button th:text="${member.approved} ? '비활성화' : '승인'"
+                        th:classappend="${member.approved} ? 'btn-warning' : 'btn-primary'"
+                        th:onclick="|changeApprove(${member.id})|"
+                        class="btn">
+                    버튼
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
