@@ -36,4 +36,8 @@ public class Member {
     public void approve() {
         this.approved = true;
     }
+
+    public void disapprove() {
+        this.approved = false;
+    }
 }

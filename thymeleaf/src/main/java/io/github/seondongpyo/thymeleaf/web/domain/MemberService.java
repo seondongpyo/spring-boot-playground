@@ -22,8 +22,15 @@ public class MemberService {
                             : memberRepository.findAllByRole(role);
     }
 
-    public void approve(Long memberId) {
+    public void approve(Long memberId, String approvalCommand) {
         memberRepository.findById(memberId)
-            .ifPresent(Member::approve);
+            .ifPresent(member -> {
+                if (approvalCommand.equals("approve")) {
+                    member.approve();
+                    return;
+                }
+                member.disapprove();
+            });
+
     }
 }

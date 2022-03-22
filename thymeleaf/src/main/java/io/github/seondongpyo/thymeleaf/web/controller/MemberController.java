@@ -34,10 +34,11 @@ public class MemberController {
         return "table-members";
     }
 
-    @PostMapping("/members/{memberId}/approve")
+    @PostMapping("/members/{memberId}/{approvalCommand}")
     @ResponseBody
-    public String approve(@PathVariable Long memberId) {
-        memberService.approve(memberId);
+    public String approve(@PathVariable Long memberId,
+                          @PathVariable String approvalCommand) {
+        memberService.approve(memberId, approvalCommand);
         return "success";
     }
 
