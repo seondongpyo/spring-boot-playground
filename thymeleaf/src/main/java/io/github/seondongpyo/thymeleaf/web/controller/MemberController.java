@@ -6,9 +6,7 @@ import io.github.seondongpyo.thymeleaf.web.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -34,6 +32,13 @@ public class MemberController {
         List<Member> members = memberService.findAllByRole(role);
         model.addAttribute("members", members);
         return "table-members";
+    }
+
+    @PostMapping("/members/{memberId}/approve")
+    @ResponseBody
+    public String approve(@PathVariable Long memberId) {
+        memberService.approve(memberId);
+        return "success";
     }
 
     @PostConstruct
