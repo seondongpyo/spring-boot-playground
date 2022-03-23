@@ -28,7 +28,6 @@ public class MemberController {
     @GetMapping("/members")
     public String members(@RequestParam(required = false) Role role,
                           Model model) {
-        System.out.println("MemberController.members");
         List<Member> members = memberService.findAllByRole(role);
         model.addAttribute("members", members);
         return "table-members";
@@ -40,6 +39,12 @@ public class MemberController {
                           @PathVariable String approvalCommand) {
         memberService.approve(memberId, approvalCommand);
         return "success";
+    }
+
+    @GetMapping("/members/register")
+    public String register(Model model) {
+        model.addAttribute("member", new Member());
+        return "register";
     }
 
     @PostConstruct
