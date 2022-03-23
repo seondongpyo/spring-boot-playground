@@ -5,6 +5,8 @@ import io.github.seondongpyo.thymeleaf.web.domain.MemberRegisterForm;
 import io.github.seondongpyo.thymeleaf.web.domain.MemberService;
 import io.github.seondongpyo.thymeleaf.web.domain.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +38,10 @@ public class MemberController {
 
     @PostMapping("/members/{memberId}/{approvalCommand}")
     @ResponseBody
-    public String approve(@PathVariable Long memberId,
-                          @PathVariable String approvalCommand) {
+    public ResponseEntity<String> approve(@PathVariable Long memberId,
+                                          @PathVariable String approvalCommand) {
         memberService.approve(memberId, approvalCommand);
-        return "success";
+        return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     @GetMapping("/members/register")
