@@ -1,6 +1,7 @@
 package io.github.seondongpyo.thymeleaf.web.controller;
 
 import io.github.seondongpyo.thymeleaf.web.domain.Member;
+import io.github.seondongpyo.thymeleaf.web.domain.MemberRegisterForm;
 import io.github.seondongpyo.thymeleaf.web.domain.MemberService;
 import io.github.seondongpyo.thymeleaf.web.domain.Role;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,13 @@ public class MemberController {
     public String register(Model model) {
         model.addAttribute("member", new Member());
         return "register";
+    }
+
+    @PostMapping("/members/register")
+    public String register(@ModelAttribute MemberRegisterForm form) {
+        Member member = form.toEntity();
+        memberService.save(member);
+        return "redirect:/";
     }
 
     @PostConstruct
