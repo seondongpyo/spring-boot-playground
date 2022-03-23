@@ -31,6 +31,5 @@ public class MemberService {
                 }
                 member.disapprove();
             });
-
     }
 }

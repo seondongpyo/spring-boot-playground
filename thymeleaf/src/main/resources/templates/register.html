@@ -10,21 +10,24 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
-<div class="text-center container" style="align-items: center; max-width: 400px">
-    <form>
+<div class="text-center container" style="align-items: center; max-width: 200px">
+    <form method="post" th:action th:object="${member}">
         <div class="form-group">
-            <label for="name"></label>
-            <input type="email" class="form-control" id="name" placeholder="이름">
+            <label for="name">이름</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
         </div>
         <div class="form-group">
-            <label for="age"></label>
-            <input type="text" class="form-control" id="age" placeholder="나이">
+            <label for="age">나이</label>
+            <input type="text" class="form-control" id="age" th:field="*{age}">
         </div>
         <div class="form-group">
-            <label for="role"></label>
+            <label for="role">권한</label>
             <select class="form-control" id="role">
-                <option selected>회원</option>
-                <option>관리자</option>
+                <option th:each="role : ${roles}"
+                        th:text="${role.name}"
+                        th:value="${role.name}">
+                    권한
+                </option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">등록</button>

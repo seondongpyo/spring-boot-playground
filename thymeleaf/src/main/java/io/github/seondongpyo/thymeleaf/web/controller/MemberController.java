@@ -19,7 +19,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @ModelAttribute
+    @ModelAttribute("roles")
     public List<Role> roles() {
         return Arrays.stream(Role.values())
             .collect(Collectors.toList());

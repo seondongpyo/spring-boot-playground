@@ -16,14 +16,14 @@ public class Member {
 
     private String name;
 
-    private int age;
+    private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     private boolean approved;
 
-    public Member(String name, int age, Role role) {
+    public Member(String name, Integer age, Role role) {
         this.name = name;
         this.age = age;
         this.role = role;
