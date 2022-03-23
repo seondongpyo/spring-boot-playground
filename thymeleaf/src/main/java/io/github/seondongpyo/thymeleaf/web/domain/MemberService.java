@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -17,9 +18,11 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public List<Member> findAllByRole(Role role) {
-        return role.isAll() ? memberRepository.findAll()
-                            : memberRepository.findAllByRole(role);
+    public List<Member> findAllByRole(Optional<Role> role) {
+        if (role.isEmpty()) {
+            return memberRepository.findAll();
+        }
+        return memberRepository.findAllByRole(role.get());
     }
 
     public void approve(Long memberId, String approvalCommand) {

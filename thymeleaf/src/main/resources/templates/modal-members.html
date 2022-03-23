@@ -13,6 +13,7 @@
             <div class="modal-body">
                 <label>회원 등급 :
                     <select name="role" id="member-role">
+                        <option th:value="null" selected>전체</option>
                         <option th:each="role : ${T(io.github.seondongpyo.thymeleaf.web.domain.Role).values()}"
                                 th:text="${role}"
                                 th:value="${role}">

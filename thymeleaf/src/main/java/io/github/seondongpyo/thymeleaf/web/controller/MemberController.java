@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class MemberController {
     }
 
     @GetMapping("/members")
-    public String members(@RequestParam(required = false) Role role,
+    public String members(@RequestParam Optional<Role> role,
                           Model model) {
         List<Member> members = memberService.findAllByRole(role);
         model.addAttribute("members", members);
