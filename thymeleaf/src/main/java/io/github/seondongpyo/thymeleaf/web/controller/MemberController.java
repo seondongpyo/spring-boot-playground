@@ -5,10 +5,13 @@ import io.github.seondongpyo.thymeleaf.web.domain.MemberRegisterForm;
 import io.github.seondongpyo.thymeleaf.web.domain.MemberService;
 import io.github.seondongpyo.thymeleaf.web.domain.Role;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class MemberController {
@@ -47,12 +51,19 @@ public class MemberController {
 
     @GetMapping("/members/register")
     public String register(Model model) {
-        model.addAttribute("member", new Member());
+        model.addAttribute("form", new MemberRegisterForm());
         return "register";
     }
 
     @PostMapping("/members/register")
-    public String register(@ModelAttribute MemberRegisterForm form) {
+    public String register(@Validated @ModelAttribute("form") MemberRegisterForm form,
+                           BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            log.warn("validation error = {}", bindingResult.getAllErrors());
+            return "register";
+        }
+
         Member member = form.toEntity();
         memberService.save(member);
         return "redirect:/";
