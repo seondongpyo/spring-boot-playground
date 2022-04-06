@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.seondongpyo.mybatis.mapper.TeamMapper">
+
+    <select id="findById" resultType="io.github.seondongpyo.mybatis.domain.football.Team">
+        SELECT
+            id,
+            name
+        FROM
+            Team
+        WHERE
+            id = #{id}
+    </select>
+</mapper>
