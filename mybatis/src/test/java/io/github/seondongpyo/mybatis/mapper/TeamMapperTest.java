@@ -31,5 +31,4 @@ class TeamMapperTest {
         assertThat(players).hasSize(2);
         assertThat(playerNames).containsExactly("Son Heung-min", "Harry Kane");
     }
-
 }
