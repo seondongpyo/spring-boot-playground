@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS Member;
 DROP TABLE IF EXISTS Post;
 DROP TABLE IF EXISTS Player;
 DROP TABLE IF EXISTS Team;
+DROP TABLE IF EXISTS Lawsuit;
+DROP TABLE IF EXISTS Client;
 
 CREATE TABLE Member
 (
@@ -44,3 +46,21 @@ CREATE TABLE Player
 INSERT INTO Player VALUES(1, 1, 'Son Heung-min', 'LW');
 INSERT INTO Player VALUES(2, 1, 'Harry Kane', 'CF');
 
+CREATE TABLE Client
+(
+    id       bigint auto_increment,
+    sequence bigint,
+    name     varchar(255),
+    PRIMARY KEY (id, sequence)
+);
+
+INSERT INTO Client VALUES(1, 1, 'ClientA');
+INSERT INTO Client VALUES(1, 2, 'ClientB');
+
+CREATE TABLE Lawsuit
+(
+    id   bigint primary key auto_increment,
+    name varchar(255)
+);
+
+INSERT INTO Lawsuit VALUES(1, 'CaseA');

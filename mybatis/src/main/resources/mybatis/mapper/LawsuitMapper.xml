@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.seondongpyo.mybatis.mapper.LawsuitMapper">
+
+    <select id="findById" resultMap="Lawsuit">
+        SELECT
+            *
+        FROM
+            Lawsuit
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="findAllByLawsuitId" resultType="io.github.seondongpyo.mybatis.domain.suit.Client">
+        SELECT
+            *
+        FROM
+            Client
+        WHERE
+            id = #{id}
+    </select>
+
+    <resultMap id="Lawsuit" type="io.github.seondongpyo.mybatis.domain.suit.Lawsuit">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="clients" column="id" select="findAllByLawsuitId"/>
+    </resultMap>
+</mapper>
