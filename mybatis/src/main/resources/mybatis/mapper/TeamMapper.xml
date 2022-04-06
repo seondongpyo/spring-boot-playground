@@ -5,13 +5,27 @@
 
 <mapper namespace="io.github.seondongpyo.mybatis.mapper.TeamMapper">
 
-    <select id="findById" resultType="io.github.seondongpyo.mybatis.domain.football.Team">
+    <select id="findById" resultMap="Team">
         SELECT
-            id,
-            name
+            *
         FROM
             Team
         WHERE
             id = #{id}
     </select>
+
+    <select id="findAllByTeamId" resultType="io.github.seondongpyo.mybatis.domain.football.Player">
+        SELECT
+            *
+        FROM
+            Player
+        WHERE
+            team_id = #{id}
+    </select>
+
+    <resultMap id="Team" type="io.github.seondongpyo.mybatis.domain.football.Team">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="players" column="id" select="findAllByTeamId"/>
+    </resultMap>
 </mapper>
