@@ -45,4 +45,12 @@ class ClientQueryingDAOTest {
         String name = queryingDAO.getName(1L);
         assertThat(name).isEqualTo("kim");
     }
+
+    @Test
+    void findClientById() {
+        Client client = queryingDAO.findById(1L);
+        assertThat(client).isNotNull();
+        assertThat(client.getName()).isEqualTo("kim");
+        assertThat(client.getAge()).isEqualTo(20);
+    }
 }

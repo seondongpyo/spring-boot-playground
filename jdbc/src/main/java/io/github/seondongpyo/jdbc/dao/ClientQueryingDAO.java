@@ -1,11 +1,12 @@
 package io.github.seondongpyo.jdbc.dao;
 
-import io.github.seondongpyo.jdbc.domain.Client;
-import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
+import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import io.github.seondongpyo.jdbc.domain.Client;
+import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
 
 @Repository
 public class ClientQueryingDAO {
@@ -23,6 +24,10 @@ public class ClientQueryingDAO {
     }
 
     public String getName(long id) {
-        return jdbcTemplate.queryForObject("select name from clients where id = " + id, String.class);
+        return jdbcTemplate.queryForObject("select name from clients where id = ?", String.class, id);
+    }
+
+    public Client findById(long id) {
+        return jdbcTemplate.queryForObject("select * from clients where id = ?", clientRowMapper, id);
     }
 }
