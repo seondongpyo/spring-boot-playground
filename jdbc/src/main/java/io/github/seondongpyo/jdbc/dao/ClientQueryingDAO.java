@@ -34,4 +34,8 @@ public class ClientQueryingDAO {
     public List<Client> findAllClients() {
         return jdbcTemplate.query("select * from clients", clientRowMapper);
     }
+
+    public Client findByName(String name) {
+        return jdbcTemplate.queryForObject("select * from clients where name = ?", clientRowMapper, name);
+    }
 }

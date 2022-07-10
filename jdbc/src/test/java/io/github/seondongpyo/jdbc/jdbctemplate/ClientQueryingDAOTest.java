@@ -59,4 +59,11 @@ class ClientQueryingDAOTest {
         List<Client> clients = queryingDAO.findAllClients();
         assertThat(clients).hasSize(2);
     }
+
+    @Test
+    void findByName() {
+        Client client = queryingDAO.findByName("lee");
+        assertThat(client.getId()).isEqualTo(2L);
+        assertThat(client.getAge()).isEqualTo(30);
+    }
 }
