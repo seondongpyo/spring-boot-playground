@@ -1,17 +1,18 @@
 package io.github.seondongpyo.jdbc.jdbctemplate;
 
-import io.github.seondongpyo.jdbc.dao.ClientQueryingDAO;
-import io.github.seondongpyo.jdbc.domain.Client;
-import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
+import static org.assertj.core.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import io.github.seondongpyo.jdbc.dao.ClientQueryingDAO;
+import io.github.seondongpyo.jdbc.domain.Client;
+import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
 
 @JdbcTest
 class ClientQueryingDAOTest {
@@ -37,5 +38,11 @@ class ClientQueryingDAOTest {
     void count() {
         List<Client> clients = queryingDAO.findAll();
         assertThat(clients).hasSize(2);
+    }
+
+    @Test
+    void getName() {
+        String name = queryingDAO.getName(1L);
+        assertThat(name).isEqualTo("kim");
     }
 }
