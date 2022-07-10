@@ -36,8 +36,8 @@ class ClientQueryingDAOTest {
 
     @Test
     void count() {
-        List<Client> clients = queryingDAO.findAll();
-        assertThat(clients).hasSize(2);
+        long count = queryingDAO.count();
+        assertThat(count).isEqualTo(2);
     }
 
     @Test
@@ -52,5 +52,11 @@ class ClientQueryingDAOTest {
         assertThat(client).isNotNull();
         assertThat(client.getName()).isEqualTo("kim");
         assertThat(client.getAge()).isEqualTo(20);
+    }
+
+    @Test
+    void findAllClients() {
+        List<Client> clients = queryingDAO.findAllClients();
+        assertThat(clients).hasSize(2);
     }
 }

@@ -19,8 +19,8 @@ public class ClientQueryingDAO {
         this.clientRowMapper = clientRowMapper;
     }
 
-    public List<Client> findAll() {
-        return jdbcTemplate.query("select * from clients", clientRowMapper);
+    public long count() {
+        return jdbcTemplate.queryForObject("select count(*) from clients", Long.class);
     }
 
     public String getName(long id) {
@@ -29,5 +29,9 @@ public class ClientQueryingDAO {
 
     public Client findById(long id) {
         return jdbcTemplate.queryForObject("select * from clients where id = ?", clientRowMapper, id);
+    }
+
+    public List<Client> findAllClients() {
+        return jdbcTemplate.query("select * from clients", clientRowMapper);
     }
 }
