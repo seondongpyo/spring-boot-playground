@@ -1,12 +1,11 @@
 package io.github.seondongpyo.jdbc.dao;
 
-import java.util.List;
-
+import io.github.seondongpyo.jdbc.domain.Client;
+import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import io.github.seondongpyo.jdbc.domain.Client;
-import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
+import java.util.List;
 
 @Repository
 public class ClientQueryingDAO {
