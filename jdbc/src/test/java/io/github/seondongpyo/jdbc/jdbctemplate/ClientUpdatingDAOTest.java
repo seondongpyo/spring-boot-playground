@@ -54,4 +54,13 @@ class ClientUpdatingDAOTest {
         assertThat(updatedClient.getName()).isEqualTo("김길동");
         assertThat(updatedClient.getAge()).isEqualTo(30);
     }
+
+    @Test
+    void delete() {
+        updatingDAO.delete(1L);
+
+        Client client = queryingDAO.findById(1L);
+
+        assertThat(client).isNull();
+    }
 }

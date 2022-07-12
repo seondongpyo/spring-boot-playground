@@ -20,4 +20,8 @@ public class ClientUpdatingDAO {
         jdbcTemplate.update("UPDATE clients SET name = ?, age = ? WHERE id = ?",
             updateParam.getName(), updateParam.getAge(), updateParam.getId());
     }
+
+    public void delete(long id) {
+        jdbcTemplate.update("DELETE FROM clients WHERE id = ?", id);
+    }
 }
