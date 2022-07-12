@@ -29,16 +29,29 @@ class ClientUpdatingDAOTest {
         jdbcTemplate.execute("DROP TABLE IF EXISTS clients");
         jdbcTemplate.execute("CREATE TABLE clients" +
             "(id BIGINT PRIMARY KEY, name VARCHAR(255), age SMALLINT)");
+
+        jdbcTemplate.update("INSERT INTO clients(id, name, age) VALUES(?, ?, ?)", 1L, "홍길동", 20);
     }
 
     @Test
     void insert() {
-        Client client = new Client(1L, "hong", 20);
+        Client client = new Client(10L, "hong", 20);
         updatingDAO.insert(client);
 
-        Client foundClient = queryingDAO.findById(1L);
+        Client foundClient = queryingDAO.findById(10L);
 
         assertThat(foundClient.getName()).isEqualTo("hong");
         assertThat(foundClient.getAge()).isEqualTo(20);
+    }
+
+    @Test
+    void update() {
+        Client updateParam = new Client(1L, "김길동", 30);
+        updatingDAO.update(updateParam);
+
+        Client updatedClient = queryingDAO.findById(1L);
+
+        assertThat(updatedClient.getName()).isEqualTo("김길동");
+        assertThat(updatedClient.getAge()).isEqualTo(30);
     }
 }

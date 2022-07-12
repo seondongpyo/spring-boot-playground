@@ -15,4 +15,9 @@ public class ClientUpdatingDAO {
         jdbcTemplate.update("INSERT INTO clients(id, name, age) VALUES(?, ?, ?)",
             client.getId(), client.getName(), client.getAge());
     }
+
+    public void update(Client updateParam) {
+        jdbcTemplate.update("UPDATE clients SET name = ?, age = ? WHERE id = ?",
+            updateParam.getName(), updateParam.getAge(), updateParam.getId());
+    }
 }
