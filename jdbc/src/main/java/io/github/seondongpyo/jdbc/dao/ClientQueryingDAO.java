@@ -2,6 +2,7 @@ package io.github.seondongpyo.jdbc.dao;
 
 import io.github.seondongpyo.jdbc.domain.Client;
 import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -27,7 +28,8 @@ public class ClientQueryingDAO {
     }
 
     public Client findById(long id) {
-        return jdbcTemplate.queryForObject("select * from clients where id = ?", clientRowMapper, id);
+        List<Client> clients = jdbcTemplate.query("select * from clients where id = ?", clientRowMapper, id);
+        return DataAccessUtils.singleResult(clients);
     }
 
     public List<Client> findAllClients() {
