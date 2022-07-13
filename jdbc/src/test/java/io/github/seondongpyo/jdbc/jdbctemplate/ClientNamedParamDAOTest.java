@@ -2,6 +2,7 @@ package io.github.seondongpyo.jdbc.jdbctemplate;
 
 import io.github.seondongpyo.jdbc.dao.ClientNamedParamDAO;
 import io.github.seondongpyo.jdbc.dao.ClientQueryingDAO;
+import io.github.seondongpyo.jdbc.domain.Client;
 import io.github.seondongpyo.jdbc.mapper.ClientRowMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +42,11 @@ class ClientNamedParamDAOTest {
     void useMapSqlParameterSource() {
         long count = namedParamDAO.useMapSqlParameterSource("kim");
         assertThat(count).isEqualTo(2);
+    }
+
+    @Test
+    void useBeanPropertySqlParameterSource() {
+        long count = namedParamDAO.useBeanPropertySqlParameterSource(new Client(1L, "kim", 20));
+        assertThat(count).isEqualTo(1);
     }
 }
